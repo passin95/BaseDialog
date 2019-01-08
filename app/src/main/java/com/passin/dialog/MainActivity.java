@@ -1,13 +1,29 @@
-## Dialog
+package com.passin.dialog;
 
-Dialog的实用封装，保留高性能的情况下，尽可能的方便使用。
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.DialogInterface.OnShowListener;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.passin.dialog.EHiDialog.OnLongClickListener;
 
-只有一个类，代码简单易懂实用，易扩展易修改，需要的直接复制代码。
+public class MainActivity extends AppCompatActivity {
 
-## 使用方式
-
-```java
-   EHiDialog.newBuilder(MainActivity.this)
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        findViewById(R.id.tv_demo).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EHiDialog.newBuilder(MainActivity.this)
                         .contentId(R.layout.dialog_demo)
                         .cancelable(true)
                         .cancelOnTouchOutside(false)
@@ -34,7 +50,6 @@ Dialog的实用封装，保留高性能的情况下，尽可能的方便使用�
                                         "dialog dismiss了", Toast.LENGTH_LONG).show();
                             }
                         })
-                        // build 后才能操纵 view。
                         .build()
                         .setBackgroundColor(R.id.iv_test,
                                 ContextCompat.getColor(MainActivity.this,R.color.colorAccent))
@@ -78,11 +93,7 @@ Dialog的实用封装，保留高性能的情况下，尽可能的方便使用�
                             }
                         })
                         .show();
-```
-
-## Thanks
-
-[BaseRecyclerViewAdapterHelper](https://github.com/passin95/BaseRecyclerViewAdapterHelper)
-
-
-
+            }
+        });
+    }
+}
