@@ -606,8 +606,8 @@ public class EHiDialog extends AppCompatDialog {
         }
 
         /**
-         * 出于性能考虑（不在 Builder 时候就利用容器具体的视图操作），
-         * build 之后才能设置具体的控件。
+         * 出于性能考虑，不在 Builder 时候利用容器储存具体的视图操作，
+         * 调用 build() 之后才能操作视图。
          */
         public EHiDialog build() {
             if (contentId == 0) {

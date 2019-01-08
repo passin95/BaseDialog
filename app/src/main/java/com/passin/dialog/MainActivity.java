@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                         .build()
                         .setBackgroundColor(R.id.iv_test,
                                 ContextCompat.getColor(MainActivity.this,R.color.colorAccent))
-                        .setText(R.id.tv_test, "你好啊")
-                        .setText(R.id.et_test,"德玛西亚")
+                        .setText(R.id.tv_test, "测试文字")
+                        .setText(R.id.et_test,"测试输入框")
                         .setTextColor(R.id.tv_test, 0xff222222)
                         .setChecked(R.id.cb_test, true)
                         .setProgress(R.id.progress_test, 30)
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                                         break;
                                     case R.id.iv_test:
                                         Toast.makeText(MainActivity.this,
-                                                "长按监听图片监听", Toast.LENGTH_LONG).show();
+                                                "长按 imgeview 监听", Toast.LENGTH_LONG).show();
                                         break;
                                 }
                                 return true;
