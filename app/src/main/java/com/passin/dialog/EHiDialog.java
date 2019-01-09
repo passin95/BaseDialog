@@ -226,18 +226,6 @@ public class EHiDialog extends AppCompatDialog {
     }
 
     /**
-     * Apply the typeface to all the given viewIds, and enable subpixel rendering.
-     */
-    public EHiDialog setTypeface(Typeface typeface, int... viewIds) {
-        for (int viewId : viewIds) {
-            TextView view = getView(viewId);
-            view.setTypeface(typeface);
-            view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        }
-        return this;
-    }
-
-    /**
      * Sets the progress of a ProgressBar.
      *
      * @param viewId The view id.
