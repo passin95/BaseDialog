@@ -79,7 +79,7 @@ Dialog的实用封装，保留高性能的情况下，尽可能的方便使用�
                   .show();
 ```
 
-## Thanks
+## 致谢
 
 [BaseRecyclerViewAdapterHelper](https://github.com/passin95/BaseRecyclerViewAdapterHelper)
 
