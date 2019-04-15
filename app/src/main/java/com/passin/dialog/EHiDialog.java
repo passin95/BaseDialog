@@ -178,28 +178,15 @@ public class EHiDialog extends AppCompatDialog {
     }
 
     /**
-     * Set a view visibility to VISIBLE (true) or GONE (false).
+     * Set a view visibility to VISIBLE or INVISIBLE or GONE.
      *
      * @param viewId The view id.
-     * @param visible True for VISIBLE, false for GONE.
+     * @param visibility VISIBLE or INVISIBLE or GONE
      * @return The EHiDialog for chaining.
      */
-    public EHiDialog setGone(@IdRes int viewId, boolean visible) {
+    public EHiDialog setVisible(@IdRes int viewId, int visibility) {
         View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.GONE);
-        return this;
-    }
-
-    /**
-     * Set a view visibility to VISIBLE (true) or INVISIBLE (false).
-     *
-     * @param viewId The view id.
-     * @param visible True for VISIBLE, false for INVISIBLE.
-     * @return The EHiDialog for chaining.
-     */
-    public EHiDialog setVisible(@IdRes int viewId, boolean visible) {
-        View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+        view.setVisibility(visibility);
         return this;
     }
 
@@ -388,9 +375,6 @@ public class EHiDialog extends AppCompatDialog {
         for (int id : viewId) {
             final View view = getView(id);
             if (view != null) {
-                if (!view.isClickable()) {
-                    view.setClickable(true);
-                }
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -406,6 +390,19 @@ public class EHiDialog extends AppCompatDialog {
     }
 
     /**
+     * Setting Click Listener Separately
+     *
+     * @param viewId add the view id
+     * @param listener OnClickListener
+     * @return The EHiDialog for chaining.
+     */
+    public EHiDialog setOnClickListener(@IdRes int viewId, View.OnClickListener listener) {
+        final View view = getView(viewId);
+        view.setOnClickListener(listener);
+        return this;
+    }
+
+    /**
      * add onLongClick view id.
      *
      * @param viewId add the view id
@@ -415,9 +412,6 @@ public class EHiDialog extends AppCompatDialog {
         for (int id : viewId) {
             final View view = getView(id);
             if (view != null) {
-                if (!view.isClickable()) {
-                    view.setLongClickable(true);
-                }
                 view.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
@@ -431,6 +425,20 @@ public class EHiDialog extends AppCompatDialog {
         }
         return this;
     }
+
+    /**
+     * Setting Click Listener Separately
+     *
+     * @param viewId add the view id
+     * @param listener OnLongClickListener
+     * @return The EHiDialog for chaining.
+     */
+    public EHiDialog setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener listener) {
+        final View view = getView(viewId);
+        view.setOnLongClickListener(listener);
+        return this;
+    }
+
 
     /**
      * from findViewById get View
@@ -463,7 +471,7 @@ public class EHiDialog extends AppCompatDialog {
         private boolean cancelable = true;
         private boolean cancelOnTouchOutside;
         private int gravity = Gravity.CENTER;
-        private int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        private int width = ViewGroup.LayoutParams.MATCH_PARENT;
         private int height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
         private DialogInterface.OnCancelListener onCancelListener;

@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnShowListener;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -16,6 +18,7 @@ import com.passin.dialog.EHiDialog.OnLongClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
+    @RequiresApi(api = VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
                         .contentId(R.layout.dialog_demo)
                         .cancelable(true)
                         .cancelOnTouchOutside(false)
-                        .fullScreen()
                         .gravity(Gravity.CENTER)
                         .setOnShowListener(new OnShowListener() {
                             @Override
@@ -52,30 +54,33 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .build()
                         .setBackgroundColor(R.id.iv_test,
-                                ContextCompat.getColor(MainActivity.this,R.color.colorAccent))
+                                ContextCompat.getColor(MainActivity.this, R.color.colorAccent))
                         .setText(R.id.tv_test, "测试文字")
-                        .setText(R.id.et_test,"测试输入框")
+                        .setText(R.id.et_test, "测试输入框")
                         .setTextColor(R.id.tv_test, 0xff222222)
                         .setChecked(R.id.cb_test, true)
                         .setProgress(R.id.progress_test, 30)
-                        .addOnClickListener(R.id.btn_visible, R.id.tv_test)
+                        .addOnClickListener(R.id.btn_visible)
                         .setOnClickListener(new EHiDialog.OnClickListener() {
                             @Override
                             public void onClick(EHiDialog dialog, View view) {
                                 switch (view.getId()) {
-                                    case R.id.tv_test:
-                                        Toast.makeText(MainActivity.this,
-                                                ((TextView) view).getText().toString(), Toast.LENGTH_LONG).show();
-                                        break;
                                     case R.id.btn_visible:
                                         View llTestContent = dialog.getView(R.id.ll_test_content);
-                                        dialog.setGone(R.id.ll_test_content,
-                                                llTestContent.getVisibility() != View.VISIBLE);
+                                        dialog.setVisible(R.id.ll_test_content,
+                                                llTestContent.getVisibility());
                                         break;
                                 }
                             }
                         })
-                        .addOnLongClickListener(R.id.btn_visible, R.id.iv_test)
+                        .setOnClickListener(R.id.tv_test, new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this,
+                                        ((TextView) v).getText().toString(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnLongClickListener(R.id.btn_visible)
                         .setOnLongClickListener(new OnLongClickListener() {
                             @Override
                             public boolean onLongClick(EHiDialog dialog, View view) {
@@ -84,11 +89,16 @@ public class MainActivity extends AppCompatActivity {
                                         Toast.makeText(MainActivity.this,
                                                 "长按消失可见按钮", Toast.LENGTH_LONG).show();
                                         break;
-                                    case R.id.iv_test:
-                                        Toast.makeText(MainActivity.this,
-                                                "长按 imgeview 监听", Toast.LENGTH_LONG).show();
-                                        break;
                                 }
+                                return true;
+                            }
+                        })
+                        .setOnLongClickListener(R.id.iv_test, new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+
+                                Toast.makeText(MainActivity.this,
+                                        "长按 imgeview 监听", Toast.LENGTH_LONG).show();
                                 return true;
                             }
                         })
